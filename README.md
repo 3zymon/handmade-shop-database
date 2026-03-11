@@ -18,19 +18,21 @@ Projekt umożliwia zarządzanie klientami, zamówieniami, produktami, materiała
 - ERD (draw.io)
 
 ## Struktura projektu
+```
 handmade-shop-database
 |
-├─ schema.sql            
-├─ functions.sql
-├─ triggers.sql
-├─ views.sql
-├─ cursors.sql
-├─ example_queries.sql
-├─ example_transactions.sql
-├─ sample_data.sql
-├─ ERD.drawio.svg
-├─ ERD.drawio
+├─ schema.sql                      # struktura bazy danych (tabele, klucze)
+├─ functions.sql                   # funkcje SQL
+├─ triggers.sql                    # wyzwalacze
+├─ views.sql                       # widoki
+├─ cursors.sql                     # przykłady użycia kursora
+├─ example_queries.sql             # przykładowe zapytania
+├─ example_transactions.sql        # przykładowe transakcje
+├─ sample_data.sql                 # przykładowe dane
+├─ ERD.drawio.svg                  # diagram bazy danych
+├─ ERD.drawio                      # diagram bazy danych
 └─ README.md
+```
 
 ## Model danych
 Baza danych składa się z tabeli przedstawiających:
@@ -44,7 +46,7 @@ Baza danych składa się z tabeli przedstawiających:
 - materiały używane do zrobienia produktów
 
 ### Ograniczenia
-Zapewniają one spójność i poprawność danych.
+Mają na celu zapewnienie poprawności, spójności oraz wiarygodności przechowywanych danych.
 - PRIMARY KEY
 - FOREIGN KEY
 - UNIQUE
@@ -65,18 +67,19 @@ Realizują logike biznesową.
 - liczenie produktów w zamówieniu
 - sprawdzanie czy zamówienie zostało opłacone
 - oblicznie liczby zamówień klienta
+- sprawdzanie dostępności materiału w magazynie
 - obliczanie średniej wartości zamówień klienta
 
 ### Wyzwalacze
 Automatycznei ustawia datę zamówienia przy dodaniu nowego rekordu do tabeli zamówienie.
 
 ### Transakacje
-- zmiana statusu zamówienia
-- rejestracja płatności
+- zmiana statusu zamówienia i rejestracja płatności
 - składanie zamówienia
 
 ### Kursory
-Przykład do wykorzystania kursora do przetwarzania rekordów zamówień w operacjach wykonywanych iteracyjnie.
+Przykład kursora do przetwarzania rekordów zamówień w operacjach wykonywanych iteracyjnie
+- ustawienie statusu 'Wyslane' dla wszystkich zamówień wysłanych dzisiaj
 
 ## Możliwe rozszerzenia projektu 
 - system ról i uprawnień użytkowników
