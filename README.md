@@ -21,14 +21,14 @@ Projekt umożliwia zarządzanie klientami, zamówieniami, produktami, materiała
 ```
 handmade-shop-database
 |
-├─ schema.sql                      # struktura bazy danych (tabele, klucze)
-├─ functions.sql                   # funkcje SQL
-├─ triggers.sql                    # wyzwalacze
-├─ views.sql                       # widoki
-├─ cursors.sql                     # przykłady użycia kursora
-├─ example_queries.sql             # przykładowe zapytania
-├─ example_transactions.sql        # przykładowe transakcje
-├─ sample_data.sql                 # przykładowe dane
+├─ 01_schema.sql                      # struktura bazy danych (tabele, klucze)
+├─ 02_functions.sql                   # funkcje SQL
+├─ 03_triggers.sql                    # wyzwalacze
+├─ 04_views.sql                       # widoki
+├─ 05_cursors.sql                     # przykłady użycia kursora
+├─ 06_example_queries.sql             # przykładowe zapytania
+├─ 07_example_transactions.sql        # przykładowe transakcje
+├─ 08_sample_data.sql                 # przykładowe dane
 ├─ ERD.drawio.svg                  # diagram bazy danych
 ├─ ERD.drawio                      # diagram bazy danych
 └─ README.md
