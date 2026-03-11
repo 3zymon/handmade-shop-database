@@ -29,8 +29,8 @@ handmade-shop-database
 ├─ 06_example_queries.sql             # przykładowe zapytania
 ├─ 07_example_transactions.sql        # przykładowe transakcje
 ├─ 08_sample_data.sql                 # przykładowe dane
-├─ ERD.drawio.svg                  # diagram bazy danych
-├─ ERD.drawio                      # diagram bazy danych
+├─ ERD.drawio.svg                     # diagram bazy danych
+├─ ERD.drawio                         # diagram bazy danych
 └─ README.md
 ```
 
