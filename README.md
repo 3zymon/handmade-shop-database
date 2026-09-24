@@ -1,6 +1,6 @@
 # Handmade Shop Database
 
-Baza danych zaprojetowana dla małego przzedsiębiorstwa zajmującego się sprzedażą produktów handmade.
+Baza danych zaprojektowana dla małego przedsiębiorstwa zajmującego się sprzedażą produktów handmade.
 Projekt umożliwia zarządzanie klientami, zamówieniami, produktami, materiałami produkcyjnymi oraz płatnościami.
 
 ## Główne funkcjonalności
@@ -71,7 +71,7 @@ Realizują logike biznesową.
 - obliczanie średniej wartości zamówień klienta
 
 ### Wyzwalacze
-Automatycznei ustawia datę zamówienia przy dodaniu nowego rekordu do tabeli zamówienie.
+Automatycznie ustawia datę zamówienia przy dodaniu nowego rekordu do tabeli zamówienie.
 
 ### Transakacje
 - zmiana statusu zamówienia i rejestracja płatności
