@@ -204,31 +204,17 @@ Skrypty transakcyjne należy uruchamiać oddzielnie, ponieważ niektóre operacj
 
 ## Skills Demonstrated
 
-### Database Development
+## Skills Demonstrated
 
-- Relational Database Design
-- Entity Relationship Modeling
+**Database Development**
+- Relational Database Design & ER Modeling
 - Data Integrity Constraints
-- SQL Functions
-- Triggers & Cursors
+- SQL Functions, Triggers & Cursors
 - Transaction Management
 
-### SQL & Data Analytics
-
-- Common Table Expressions (CTE)
-- Window Functions
-- JOIN & SELF JOIN
-- Subqueries
-- Conditional Aggregation
-- Date & Time Operations
-- Analytical Views
-
-### Business Analytics
-
-- Key Performance Indicators (KPI)
-- Sales Performance Analysis
-- Customer Segmentation
-- Customer Behavior Analysis
-- Market Basket Analysis
-- Operational Performance Analysis
+**SQL & Data Analytics**
+- CTE & Window Functions
+- JOINs, Subqueries & Conditional Aggregation
+- Analytical Views & KPI Calculation
+- Customer Segmentation & Market Basket Analysis
 - Data Quality Validation
