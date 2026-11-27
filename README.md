@@ -1,88 +1,234 @@
-# Handmade Shop Database
+# Handmade E-commerce Database & SQL Analytics
 
-Baza danych zaprojektowana dla małego przedsiębiorstwa zajmującego się sprzedażą produktów handmade.
-Projekt umożliwia zarządzanie klientami, zamówieniami, produktami, materiałami produkcyjnymi oraz płatnościami.
+## Project Overview
 
-## Główne funkcjonalności
-- zarządzanie klientami
-- obsługa zamówień
-- kontrola płatności
-- zarządzanie materiałami wykorzystywanymi do produkcji
-- monitorowanie stanów magazynowych
-- analiza wartości zamówień
+Relacyjna baza danych PostgreSQL zaprojektowana dla małego przedsiębiorstwa zajmującego się sprzedażą produktów handmade.
 
-## Technologie
+Projekt łączy modelowanie relacyjnych baz danych, implementację logiki biznesowej, analitykę danych w SQL oraz kontrolę jakości danych.
+
+Głównym celem projektu jest obsługa procesów sprzedażowych oraz analiza aktywności klientów, popularności produktów i efektywności realizacji zamówień.
+
+## Technologies
+
 - PostgreSQL
 - SQL
 - PL/pgSQL
-- ERD (draw.io)
+- pgAdmin
+- Draw.io
 
-## Struktura projektu
-```
-handmade-shop-database
-|
-├─ 01_schema.sql                      # struktura bazy danych (tabele, klucze)
-├─ 02_functions.sql                   # funkcje SQL
-├─ 03_triggers.sql                    # wyzwalacze
-├─ 04_views.sql                       # widoki
-├─ 05_cursors.sql                     # przykłady użycia kursora
-├─ 06_example_queries.sql             # przykładowe zapytania
-├─ 07_example_transactions.sql        # przykładowe transakcje
-├─ 08_sample_data.sql                 # przykładowe dane
-├─ ERD.drawio.svg                     # diagram bazy danych
-├─ ERD.drawio                         # diagram bazy danych
-└─ README.md
-```
+## Key Features
 
-## Model danych
-Baza danych składa się z tabeli przedstawiających:
-- klientów
-- pracowników
-- zamówienia
-- produkty
-- materiały
-- płatności
-- produkty w zamówieniach
-- materiały używane do zrobienia produktów
+- Relacyjny model danych składający się z 8 tabel.
+- Integralność danych (PK, FK, UNIQUE, CHECK, NOT NULL).
+- Przechowywanie historycznych cen zakupionych produktów.
+- Automatyczne przeliczanie wartości zamówień.
+- Weryfikacja płatności i dostępności materiałów produkcyjnych.
+- Widoki analityczne i operacyjne (Views).
+- Funkcje, triggery i kursory.
+- Zarządzanie transakcjami (COMMIT, ROLLBACK).
+- Analiza danych biznesowych (Business Analytics).
+- Kontrola jakości danych (Data Quality Checks).
 
-### Ograniczenia
-Mają na celu zapewnienie poprawności, spójności oraz wiarygodności przechowywanych danych.
-- PRIMARY KEY
-- FOREIGN KEY
-- UNIQUE
-- NOT NULL
-- CHECK
+## Database Schema
 
-### Widoki (Views)
-Umożliwiają uproszczony dostęp do wybranych danych.
-- widok_klient_podstawowy
-- widok_dostawcy
-- widok_pracownik_podstawowy
-- widok_zamowienia_status
-- widok_material_magazyn
+| Tabela | Opis |
+|---|---|
+| `klient` | Dane klientów |
+| `pracownik` | Dane pracowników |
+| `produkt` | Katalog produktów |
+| `material` | Materiały i stany magazynowe |
+| `zamowienie` | Zamówienia klientów |
+| `platnosci` | Informacje o płatnościach |
+| `zamowiony_produkt` | Pozycje zamówień i historyczne ceny |
+| `material_produktu` | Materiały wymagane do produkcji |
 
-### Funkcje
-Realizują logike biznesową.
-- oblicznie wartości zamówienia
-- liczenie produktów w zamówieniu
-- sprawdzanie czy zamówienie zostało opłacone
-- oblicznie liczby zamówień klienta
-- sprawdzanie dostępności materiału w magazynie
-- obliczanie średniej wartości zamówień klienta
+### Entity Relationship Diagram (ERD)
 
-### Wyzwalacze
-Automatycznie ustawia datę zamówienia przy dodaniu nowego rekordu do tabeli zamówienie.
+![Database ERD](docs/ERD.drawio.svg)
 
-### Transakacje
-- zmiana statusu zamówienia i rejestracja płatności
-- składanie zamówienia
+Model wykorzystuje relacje one-to-many (1:N) oraz tabele
+pośredniczące do reprezentowania relacji many-to-many (N:M).
 
-### Kursory
-Przykład kursora do przetwarzania rekordów zamówień w operacjach wykonywanych iteracyjnie
-- ustawienie statusu 'Wyslane' dla wszystkich zamówień wysłanych dzisiaj
+## Repository Structure
 
-## Możliwe rozszerzenia projektu 
-- system ról i uprawnień użytkowników
-- archiwizacja zakończonych zamówień
-- automatyczne kopie zapasowe
-- dodatkowe raporty sprzedażowe
+    handmade-shop-database/
+      ├── docs/
+      │   ├── ERD.drawio
+      │   └── ERD.drawio.svg
+      ├── sql/
+      │   ├── 01_schema.sql
+      │   ├── 02_functions.sql
+      │   ├── 03_triggers.sql
+      │   ├── 04_views.sql
+      │   ├── 05_cursors.sql
+      │   ├── 06_sample_data.sql
+      │   ├── 07_analytics.sql
+      │   ├── 08_transactions.sql
+      │   └── 09_data_quality.sql
+      └── README.md
+
+| Plik | Zawartość |
+|---|---|
+| `01_schema.sql` | Struktura bazy, relacje i ograniczenia |
+| `02_functions.sql` | Funkcje realizujące logikę biznesową |
+| `03_triggers.sql` | Automatyczna aktualizacja wartości zamówień |
+| `04_views.sql` | Widoki analityczne i operacyjne |
+| `05_cursors.sql` | Proceduralna kontrola możliwości produkcji |
+| `06_sample_data.sql` | Przykładowe dane demonstracyjne |
+| `07_analytics.sql` | Zapytania analityczne |
+| `08_transactions.sql` | Przykłady transakcji |
+| `09_data_quality.sql` | Kontrola jakości i spójności danych |
+
+## Business Logic
+
+### Functions
+
+- Obliczanie całkowitej wartości zamówienia.
+- Obliczanie liczby sztuk produktów w zamówieniu.
+- Weryfikacja pełnego opłacenia zamówienia.
+- Sprawdzanie dostępności wymaganej ilości materiału.
+- Sprawdzanie możliwości wykonania określonej liczby produktów.
+
+### Triggers
+
+Automatyczne przeliczanie wartości zamówienia po dodaniu, aktualizacji lub usunięciu jego pozycji.
+
+Trigger wykorzystuje funkcję obliczającą wartość zamówienia na podstawie historycznych cen zakupionych produktów.
+
+### Cursors
+
+Iteracyjna kontrola możliwości wykonania aktywnych produktów na podstawie dostępności materiałów produkcyjnych.
+
+Kursor stanowi przykład programowania proceduralnego w PL/pgSQL i nie modyfikuje danych.
+
+### Transactions
+
+- Utworzenie zamówienia wraz z jego pozycjami.
+- Rejestracja płatności i aktualizacja statusu zamówienia.
+- Wycofanie aktualizacji ceny produktu za pomocą ROLLBACK.
+
+## Views
+
+Projekt zawiera 8 widoków wspierających raportowanie, analizę danych oraz operacje biznesowe:
+
+- Aktywność klientów.
+- Rozkład statusów zamówień.
+- Miesięczna sprzedaż.
+- Sprzedaż produktów.
+- Sprzedaż według kategorii.
+- Dostawcy materiałów.
+- Podstawowe dane pracowników.
+- Stany magazynowe materiałów.
+
+## Business Analytics
+
+Projekt zawiera 7 analiz odpowiadających na pytania biznesowe.
+
+| Analiza | Cel | Techniki SQL |
+|---|---|---|
+| Monthly Sales Growth (MoM) | Dynamika miesięcznej sprzedaży | CTE, LAG, NULLIF |
+| Cumulative Sales | Skumulowana wartość sprzedaży | SUM OVER, Window Frame |
+| Product Ranking | Ranking produktów w kategoriach | DENSE_RANK, PARTITION BY |
+| Customer Segmentation | Segmentacja klientów według wartości zakupów | CASE WHEN |
+| Repeat Purchase Rate | Wskaźnik powracających klientów | Conditional Aggregation |
+| Order Fulfillment Time | Średni czas pakowania i wysyłki | EXTRACT, AVG |
+| Market Basket Analysis | Produkty najczęściej kupowane razem | SELF JOIN, GROUP BY |
+
+Wskaźniki sprzedażowe bazują na wartości zamówień nieanulowanych, również tych oczekujących na płatność. Nie są więc tożsame z faktycznymi wpływami finansowymi.
+
+## Data Quality
+
+Zapytania kontrolujące jakość i spójność danych:
+
+| Test | Cel |
+|---|---|
+| Order Value Consistency | Zgodność wartości zamówienia z sumą jego pozycji |
+| Order Completeness | Wykrywanie zamówień bez produktów |
+| Payment Consistency | Wykrywanie nadpłat i niedopłat w zamówieniach |
+| Order Status Consistency | Zgodność statusów z datami realizacji |
+| Product Material Completeness | Wykrywanie aktywnych produktów bez przypisanych materiałów |
+
+Każde zapytanie zwraca rekordy naruszające określoną regułę biznesową. Brak wyników oznacza brak wykrytych nieprawidłowości w zakresie danego testu.
+
+## Sample Data
+
+Projekt wykorzystuje syntetyczny zbiór danych demonstracyjnych.
+
+| Encja | Liczba rekordów |
+|---|---:|
+| Klienci | 20 |
+| Pracownicy | 20 |
+| Produkty | 20 |
+| Materiały | 20 |
+| Zamówienia | 20 |
+| Płatności | 20 |
+
+Dane obejmują różne kategorie produktów, statusy zamówień, metody płatności oraz zamówienia wieloproduktowe.
+
+Zbiór służy do demonstracji działania bazy danych i technik analitycznych, a nie do formułowania reprezentatywnych wniosków rynkowych.
+
+## Getting Started
+
+### Requirements
+
+- PostgreSQL
+- pgAdmin
+
+### Database Setup
+
+1. Sklonuj repozytorium:
+
+2. Utwórz nową bazę danych w PostgreSQL.
+
+3. Połącz się z utworzoną bazą.
+
+4. Uruchom skrypty w następującej kolejności:
+
+       01_schema.sql
+       02_functions.sql
+       03_triggers.sql
+       04_views.sql
+       06_sample_data.sql
+
+### Running Examples
+
+Po utworzeniu bazy i załadowaniu danych można niezależnie
+uruchomić pozostałe skrypty:
+
+- `05_cursors.sql` — kontrola możliwości produkcji.
+- `07_analytics.sql` — analizy biznesowe.
+- `09_data_quality.sql` — kontrola jakości danych.
+- `08_transactions.sql` — przykłady transakcji.
+
+Skrypty transakcyjne należy uruchamiać oddzielnie, ponieważ niektóre operacje trwale modyfikują dane.
+
+## Skills Demonstrated
+
+### Database Development
+
+- Relational Database Design
+- Entity Relationship Modeling
+- Data Integrity Constraints
+- SQL Functions
+- Triggers & Cursors
+- Transaction Management
+
+### SQL & Data Analytics
+
+- Common Table Expressions (CTE)
+- Window Functions
+- JOIN & SELF JOIN
+- Subqueries
+- Conditional Aggregation
+- Date & Time Operations
+- Analytical Views
+
+### Business Analytics
+
+- Key Performance Indicators (KPI)
+- Sales Performance Analysis
+- Customer Segmentation
+- Customer Behavior Analysis
+- Market Basket Analysis
+- Operational Performance Analysis
+- Data Quality Validation
