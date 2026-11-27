@@ -204,8 +204,6 @@ Skrypty transakcyjne należy uruchamiać oddzielnie, ponieważ niektóre operacj
 
 ## Skills Demonstrated
 
-## Skills Demonstrated
-
 **Database Development**
 - Relational Database Design & ER Modeling
 - Data Integrity Constraints
