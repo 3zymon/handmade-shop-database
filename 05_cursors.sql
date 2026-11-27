@@ -1,18 +1,23 @@
---ustawienie statusu 'Wyslane' dla wszystkich zamówień wysłanych dzisiaj:
+-- Kontrola możliwości wykonania aktywnych produktów na podstawie dostępności materiałów w magazynie
 DO $$
 DECLARE
-zam RECORD;
-cursor_zamowienie CURSOR FOR
-SELECT id_zamowienie FROM zamowienie
-WHERE data_wyslania = CURRENT_DATE;
+    prod RECORD;
+    cursor_produkty CURSOR FOR
+        SELECT id_produkt, nazwa
+        FROM produkt
+        WHERE aktywny = TRUE
+        ORDER BY id_produkt;
 BEGIN
-OPEN cursor_zamowienie;
-LOOP
-FETCH NEXT FROM cursor_zamowienie INTO zam;
-EXIT WHEN NOT FOUND;
-UPDATE zamowienie
-SET status_zamowienia = 'Wyslane'
-WHERE id_zamowienie = zam.id_zamowienie;
-END LOOP;
-CLOSE cursor_zamowienie;
-END $$;
+    OPEN cursor_produkty;
+    LOOP
+        FETCH NEXT FROM cursor_produkty INTO prod;
+        EXIT WHEN NOT FOUND;
+        IF czy_produkt_mozna_wykonac(prod.id_produkt, 1) THEN
+            RAISE NOTICE 'Produkt: % - produkcja możliwa', prod.nazwa;
+        ELSE
+            RAISE NOTICE 'Produkt: % - produkcja niemożliwa', prod.nazwa;
+        END IF;
+    END LOOP;
+    CLOSE cursor_produkty;
+END;
+$$;
